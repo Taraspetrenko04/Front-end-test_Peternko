@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script> 
+         
+        // let arr =[1,2,3];
+        // function sum (x){
+        //     let count = 0;
+        //     for(i=0; i<x.length; i++){
+        //         count = count + x[i]; 
+        //     }
+        //     console.log(count);
+        // }  
+        // sum(arr);
+
+        let arr =  [1, 2, [3, 4, [5, 6], 7], 8, [9, 10]];
+        function sum(ary) {
+            let ret = [];
+            let result = 0;
+                // Сделаем многомерный массив - одномерным 
+                // циклом перебираем входящий массив
+                // проверяем каждый элемент массива на массив, если в есть вложеный массив,
+                // то выполняем рекурсивный вызов ф-ции и снова проверяем на массив; 
+                for(let i = 0; i < ary.length; i++) {
+                if(Array.isArray(ary[i])) {
+                    ret = ret.concat(sum(ary[i]));
+                    //если елемент масива число то пушим его в новый массив ret
+                    } else {
+                        ret.push(ary[i]);
+                    }
+                }
+                // далее находим сумму всех элементов нового одномерного массива методом reduce,(можно и циклом) 
+                    result = ret.reduce(function(multipl,current){
+                        return (multipl + current);
+                    });
+                    return result;
+            }
+            // вызываем ф-цию
+        console.log("Cумма всех элементов массива равна: " + sum(arr));  
+    </script>
+</body>
+</html>
